@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modular Arithmetic Simulator</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f4f7fb;margin:0;padding:30px}
+.container{max-width:800px;margin:auto;background:white;padding:24px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+h1{color:#1f4e79}
+input{padding:8px;margin:5px;width:90px}
+button{padding:8px 16px}
+.result{margin-top:20px;font-size:20px;font-weight:bold;color:#0b6}
+.circle{margin:25px auto;position:relative;width:300px;height:300px;border:3px solid #333;border-radius:50%}
+.num{position:absolute;transform:translate(-50%,-50%)}
+.hand{position:absolute;width:3px;height:120px;background:red;left:50%;bottom:50%;transform-origin:bottom center;}
+.center{position:absolute;width:10px;height:10px;background:#333;border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%)}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Interactive Modular Arithmetic</h1>
+<p>Enter a number and a modulus. The clock hand points to the remainder.</p>
+<input id="n" type="number" value="29">
+<input id="m" type="number" value="12" min="2">
+<button onclick="calc()">Calculate</button>
+<div class="result" id="out"></div>
+<div class="circle" id="clock">
+<div class="hand" id="hand"></div>
+<div class="center"></div>
+</div>
+</div>
+<script>
+const clock=document.getElementById('clock');
+for(let i=0;i<12;i++){
+ let d=document.createElement('div');
+ d.className='num';
+ let ang=(i/12)*2*Math.PI-Math.PI/2;
+ let r=130;
+ d.style.left=(150+r*Math.cos(ang))+'px';
+ d.style.top=(150+r*Math.sin(ang))+'px';
+ d.textContent=i;
+ clock.appendChild(d);
+}
+function calc(){
+ let n=parseInt(document.getElementById('n').value);
+ let m=parseInt(document.getElementById('m').value);
+ if(m<2){alert("Modulus must be at least 2");return;}
+ let rem=((n%m)+m)%m;
+ document.getElementById('out').textContent=`${n} mod ${m} = ${rem}`;
+ let pos=rem%12;
+ let deg=pos*30;
+ document.getElementById('hand').style.transform=`translateX(-50%) rotate(${deg}deg)`;
+}
+calc();
+</script>
+</body>
+</html>
