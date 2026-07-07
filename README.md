@@ -9,6 +9,6 @@
 🔹 Hypothesis Testing
 
 👨‍🏫 Developed by
-Jayabarathy G
+Dr Jayabarathy G
 
 For Engineering Mathematics & Bridge Course
